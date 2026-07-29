@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano de Treino — Corpo Atlético</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#15171b; --panel:#1d2025; --panel-2:#22262c; --line:#33383f;
+    --steel:#93a3ae; --steel-dim:#6b7580; --iron:#ff4d2e; --white:#f2f1ec;
+    --chest:#ff4d2e; --back:#4fb3ff; --legs:#7cd992; --shoulders:#ffc94f;
+    --glutes:#d68bff; --power:#ff6b3d; --sil:#3a3f46;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--white); font-family:'Inter',sans-serif; line-height:1.5; padding-bottom:80px;}
+  h1,h2,h3{font-family:'Oswald',sans-serif; text-transform:uppercase; letter-spacing:0.03em;}
+
+  .hero{position:relative; padding:90px 24px 60px;
+    background:radial-gradient(circle at 15% 20%, rgba(255,77,46,0.14), transparent 45%),
+               radial-gradient(circle at 85% 0%, rgba(79,179,255,0.10), transparent 40%), var(--bg);
+    border-bottom:1px solid var(--line);}
+  .plate-row{display:flex; gap:10px; margin-bottom:28px;}
+  .plate{width:14px; height:14px; border-radius:50%; border:3px solid var(--iron);}
+  .eyebrow{font-family:'Space Mono',monospace; color:var(--iron); font-size:13px; letter-spacing:0.25em; text-transform:uppercase; margin-bottom:18px;}
+  .hero h1{font-size:clamp(38px,7vw,84px); font-weight:700; line-height:0.95; max-width:900px;}
+  .hero h1 span{color:var(--iron);}
+  .hero p{max-width:640px; margin-top:24px; color:var(--steel); font-size:17px;}
+  .hero-meta{display:flex; flex-wrap:wrap; gap:14px; margin-top:36px;}
+  .meta-chip{border:1px solid var(--line); background:var(--panel); padding:10px 16px; border-radius:2px; font-family:'Space Mono',monospace; font-size:13px; color:var(--steel);}
+  .meta-chip b{color:var(--white);}
+
+  .callout{
+    margin-top:28px; max-width:680px; background:rgba(255,77,46,0.08);
+    border:1px solid rgba(255,77,46,0.35); border-left:3px solid var(--iron);
+    padding:16px 20px; border-radius:3px; font-size:14.5px; color:var(--steel);
+  }
+  .callout b{color:var(--white);}
+
+  .day-nav{position:sticky; top:0; z-index:50; background:rgba(21,23,27,0.94); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line); display:flex; overflow-x:auto; padding:0 24px;}
+  .day-nav a{flex:0 0 auto; color:var(--steel-dim); text-decoration:none; font-family:'Oswald',sans-serif; font-size:13px;
+    letter-spacing:0.08em; text-transform:uppercase; padding:16px 18px; border-bottom:2px solid transparent; white-space:nowrap; transition:.2s;}
+  .day-nav a:hover{color:var(--white); border-color:var(--iron);}
+
+  section{padding:64px 24px; max-width:1080px; margin:0 auto;}
+  .section-head{display:flex; align-items:baseline; gap:18px; margin-bottom:8px; border-bottom:1px solid var(--line); padding-bottom:18px; flex-wrap:wrap;}
+  .section-num{font-family:'Space Mono',monospace; font-size:15px; color:var(--iron);}
+  .section-head h2{font-size:clamp(26px,4vw,42px);}
+  .muscle-tag{margin-left:auto; font-family:'Space Mono',monospace; font-size:12px; padding:6px 12px; border-radius:20px; white-space:nowrap;}
+  .section-sub{color:var(--steel); margin:18px 0 32px; max-width:680px; font-size:15px;}
+
+  .ex-grid{display:flex; flex-direction:column; gap:12px;}
+  .ex-card{background:var(--panel); border:1px solid var(--line); border-radius:4px;
+    display:grid; grid-template-columns:76px 1fr auto; align-items:center; gap:18px; padding:16px 18px;}
+  .diagram{width:76px; height:82px; display:block;}
+  .ex-name{font-family:'Oswald',sans-serif; font-size:18px; color:var(--white);}
+  .ex-detail{display:flex; gap:16px; flex-wrap:wrap; margin-top:7px; font-family:'Space Mono',monospace; font-size:12px; color:var(--steel);}
+  .ex-detail b{color:var(--white);}
+  .ex-note{font-size:13px; color:var(--steel-dim); margin-top:7px; max-width:520px;}
+  .yt-btn{border:1px solid var(--line); background:var(--panel-2); color:var(--white); text-decoration:none;
+    font-family:'Oswald',sans-serif; font-size:12px; letter-spacing:0.05em; text-transform:uppercase;
+    padding:10px 14px; border-radius:3px; display:flex; align-items:center; gap:7px; transition:.2s; white-space:nowrap;}
+  .yt-btn:hover{background:var(--iron); border-color:var(--iron);}
+  .yt-btn svg{width:11px; height:11px; fill:currentColor;}
+
+  @media(max-width:640px){
+    .ex-card{grid-template-columns:56px 1fr;}
+    .diagram{width:56px; height:62px;}
+    .yt-btn{grid-column:1/-1; justify-content:center; margin-top:6px;}
+  }
+
+  .info-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:8px;}
+  .info-box{background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--iron); padding:20px; border-radius:3px;}
+  .info-box h3{font-size:15px; margin-bottom:8px;}
+  .info-box p{font-size:13.5px; color:var(--steel);}
+
+  .equip-list{display:flex; flex-wrap:wrap; gap:10px; margin-top:20px;}
+  .equip-list span{font-family:'Space Mono',monospace; font-size:12.5px; border:1px solid var(--line); padding:8px 14px; border-radius:20px; color:var(--steel);}
+
+  table.week-table{width:100%; border-collapse:collapse; margin-top:10px;}
+  table.week-table th, table.week-table td{text-align:left; padding:14px 12px; border-bottom:1px solid var(--line); font-size:14px;}
+  table.week-table th{font-family:'Space Mono',monospace; font-size:11.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--steel-dim);}
+  table.week-table td b{color:var(--white);}
+
+  .legend{display:flex; flex-wrap:wrap; gap:16px; margin-top:18px; font-family:'Space Mono',monospace; font-size:12px; color:var(--steel);}
+  .legend span{display:flex; align-items:center; gap:8px;}
+  .legend i{width:12px; height:12px; border-radius:3px; display:inline-block;}
+
+  footer{text-align:center; padding:50px 24px 20px; color:var(--steel-dim); font-size:12.5px; font-family:'Space Mono',monospace;}
+</style>
+</head>
+<body>
+
+<!-- silhueta reutilizável -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="sil-body" viewBox="0 0 120 130">
+    <circle cx="60" cy="20" r="11" fill="#3a3f46"/>
+    <rect x="48" y="33" width="24" height="42" rx="10" fill="#3a3f46"/>
+    <rect x="30" y="36" width="10" height="34" rx="5" fill="#3a3f46"/>
+    <rect x="80" y="36" width="10" height="34" rx="5" fill="#3a3f46"/>
+    <rect x="46" y="74" width="12" height="46" rx="6" fill="#3a3f46"/>
+    <rect x="62" y="74" width="12" height="46" rx="6" fill="#3a3f46"/>
+  </symbol>
+</svg>
+
+<div class="hero">
+  <div class="plate-row"><div class="plate"></div><div class="plate"></div><div class="plate"></div><div class="plate"></div><div class="plate"></div></div>
+  <div class="eyebrow">// programa de treino — home gym</div>
+  <h1>Corpo atlético.<br>Corpo <span>definido</span>.</h1>
+  <p>Programa de 5 dias com base nos equipamentos reais da sua sala: rack de halteres, gaiola com barra, banco ajustável, leg press/hack, cross funcional e esteira. Inclui também um dia opcional de <b style="color:var(--white)">Força &amp; Potência</b> para quem quer ficar mais forte e explosivo, não só "grande".</p>
+  <div class="hero-meta">
+    <div class="meta-chip">Frequência <b>3 a 6x / semana</b></div>
+    <div class="meta-chip">Objetivo <b>Atlético + Força</b></div>
+    <div class="meta-chip">Duração por sessão <b>50–65 min</b></div>
+  </div>
+  <div class="callout">
+    <b>Sobre os vídeos:</b> os embeds de vídeo direto na página não carregam de forma confiável fora do YouTube.
+    Por isso troquei por um <b>diagrama ilustrativo</b> em cada exercício (mostra o grupo muscular trabalhado e a direção do movimento) + um botão que abre a <b>busca no YouTube</b> em uma nova aba — esse link funciona normalmente.
+  </div>
+</div>
+
+<div class="day-nav">
+  <a href="#como-usar">Como usar</a>
+  <a href="#equipamentos">Equipamentos</a>
+  <a href="#dia1">Dia 1 · Peito/Tríceps</a>
+  <a href="#dia2">Dia 2 · Costas/Bíceps</a>
+  <a href="#dia3">Dia 3 · Pernas</a>
+  <a href="#dia4">Dia 4 · Ombro/Abdômen</a>
+  <a href="#dia5">Dia 5 · Posterior/Glúteos</a>
+  <a href="#dia6">Dia 6 · Força &amp; Potência</a>
+  <a href="#semana3x">Versão 3x/semana</a>
+</div>
+
+<section id="como-usar">
+  <div class="section-head"><span class="section-num">00</span><h2>Como usar este treino</h2></div>
+  <p class="section-sub">Cada card tem um diagrama (músculo trabalhado + direção do movimento) e um botão para buscar vídeos reais no YouTube. Ajuste as cargas conforme sua evolução.</p>
+  <div class="info-grid">
+    <div class="info-box"><h3>Aquecimento (5–8 min)</h3><p>5 min de esteira/elíptico leve + 1 série leve do primeiro exercício do dia antes de carregar peso de verdade.</p></div>
+    <div class="info-box"><h3>Progressão de carga</h3><p>Quando concluir todas as séries no topo da faixa de repetições com boa execução, suba o peso na próxima sessão.</p></div>
+    <div class="info-box"><h3>Hipertrofia x Força</h3><p>Os dias 1–5 (8–15 reps) constroem músculo e já trazem ganho de força. O Dia 6 (3–6 reps + explosão) é focado em força máxima e potência.</p></div>
+    <div class="info-box"><h3>Cardio complementar</h3><p>2–3x por semana, 15–20 min de esteira/elíptico após o treino de força, intensidade moderada.</p></div>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--chest)"></i>Peito</span>
+    <span><i style="background:var(--back)"></i>Costas</span>
+    <span><i style="background:var(--shoulders)"></i>Ombro/Braço</span>
+    <span><i style="background:var(--legs)"></i>Perna</span>
+    <span><i style="background:var(--glutes)"></i>Glúteo/Posterior</span>
+    <span><i style="background:var(--power)"></i>Força/Explosão</span>
+  </div>
+</section>
+
+<section id="equipamentos">
+  <div class="section-head"><span class="section-num">01</span><h2>Equipamentos disponíveis</h2></div>
+  <p class="section-sub">Identificados nas fotos da sua sala — o treino inteiro foi montado em cima deles.</p>
+  <div class="equip-list">
+    <span>Rack de halteres (par a par, alta variedade de carga)</span>
+    <span>Gaiola / rack de agachamento com barra olímpica</span>
+    <span>Banco reto/inclinável ajustável</span>
+    <span>Leg press / hack 45°</span>
+    <span>Cross funcional (torres duplas de polia)</span>
+    <span>Esteira</span>
+    <span>Elíptico</span>
+  </div>
+</section>
+
+<section id="dia1">
+  <div class="section-head"><span class="section-num">DIA 1</span><h2>Peito &amp; Tríceps</h2>
+    <span class="muscle-tag" style="background:rgba(255,77,46,0.15); color:var(--chest); border:1px solid rgba(255,77,46,0.35);">Empurrar</span></div>
+  <p class="section-sub">Halteres do rack + banco ajustável para peito, cross funcional para finalizar tríceps.</p>
+  <div class="ex-grid" id="grid-dia1"></div>
+</section>
+
+<section id="dia2">
+  <div class="section-head"><span class="section-num">DIA 2</span><h2>Costas &amp; Bíceps</h2>
+    <span class="muscle-tag" style="background:rgba(79,179,255,0.15); color:var(--back); border:1px solid rgba(79,179,255,0.35);">Puxar</span></div>
+  <p class="section-sub">Puxada e remadas na torre de cross funcional + halteres para espessura de costas e bíceps.</p>
+  <div class="ex-grid" id="grid-dia2"></div>
+</section>
+
+<section id="dia3">
+  <div class="section-head"><span class="section-num">DIA 3</span><h2>Pernas — Quadríceps</h2>
+    <span class="muscle-tag" style="background:rgba(124,217,146,0.15); color:var(--legs); border:1px solid rgba(124,217,146,0.35);">Inferior</span></div>
+  <p class="section-sub">Agachamento na gaiola, leg press/hack e halteres — volume total de perna, foco quadríceps.</p>
+  <div class="ex-grid" id="grid-dia3"></div>
+</section>
+
+<section id="dia4">
+  <div class="section-head"><span class="section-num">DIA 4</span><h2>Ombro &amp; Abdômen</h2>
+    <span class="muscle-tag" style="background:rgba(255,201,79,0.15); color:var(--shoulders); border:1px solid rgba(255,201,79,0.35);">Superior</span></div>
+  <p class="section-sub">Deltoides completo com halteres + core no chão para definição abdominal.</p>
+  <div class="ex-grid" id="grid-dia4"></div>
+</section>
+
+<section id="dia5">
+  <div class="section-head"><span class="section-num">DIA 5</span><h2>Posterior de Coxa &amp; Glúteos</h2>
+    <span class="muscle-tag" style="background:rgba(214,139,255,0.15); color:var(--glutes); border:1px solid rgba(214,139,255,0.35);">Inferior</span></div>
+  <p class="section-sub">Stiff, elevação pélvica e cabo do cross para isolar glúteo — fecha a semana com abdômen.</p>
+  <div class="ex-grid" id="grid-dia5"></div>
+</section>
+
+<section id="dia6">
+  <div class="section-head"><span class="section-num">DIA 6</span><h2>Força Máxima &amp; Potência</h2>
+    <span class="muscle-tag" style="background:rgba(255,107,61,0.18); color:var(--power); border:1px solid rgba(255,107,61,0.4);">Opcional</span></div>
+  <p class="section-sub">
+    Você mencionou se sentir fraco e querer mais força/explosão — esse é o motivo deste dia extra.
+    Cargas mais pesadas, repetições baixas (3–6), descansos longos (2–4 min) nos compostos, e movimentos explosivos no final.
+    <b style="color:var(--white)">Não é para fazer toda semana junto com os outros 5</b>: use como 1 sessão extra na semana (se treinar 6x), ou alterne em blocos de 3–4 semanas trocando um dos dias de hipertrofia por este.
+  </p>
+  <div class="ex-grid" id="grid-dia6"></div>
+</section>
+
+<section id="semana3x">
+  <div class="section-head"><span class="section-num">02</span><h2>Se você só treinar 3x por semana</h2></div>
+  <p class="section-sub">Combine os dias assim, mantendo pelo menos 1 dia de descanso entre sessões:</p>
+  <table class="week-table">
+    <tr><th>Sessão</th><th>Conteúdo</th><th>Sugestão de dia</th></tr>
+    <tr><td><b>Treino A</b></td><td>Peito + Costas (metade dos exercícios de cada dia 1 e 2)</td><td>Segunda</td></tr>
+    <tr><td><b>Treino B</b></td><td>Pernas completo (Dia 3 + Dia 5 combinados)</td><td>Quarta</td></tr>
+    <tr><td><b>Treino C</b></td><td>Ombro + Bíceps/Tríceps + Abdômen</td><td>Sexta</td></tr>
+  </table>
+</section>
+
+<footer>PLANO GERADO PARA TREINO EM CASA · AJUSTE CARGAS CONFORME EVOLUÇÃO · CONSULTE UM PROFISSIONAL DE EDUCAÇÃO FÍSICA PARA VALIDAÇÃO DE TÉCNICA</footer>
+
+<script>
+/* ---------- diagrama: silhueta + zona muscular + seta de movimento ---------- */
+const ZONES = {
+  chest:   '<ellipse cx="60" cy="46" rx="17" ry="11"/>',
+  back:    '<rect x="45" y="34" width="30" height="32" rx="9"/>',
+  shoulder:'<circle cx="33" cy="40" r="9"/><circle cx="87" cy="40" r="9"/>',
+  arm:     '<rect x="29" y="36" width="11" height="35" rx="5"/><rect x="80" y="36" width="11" height="35" rx="5"/>',
+  abs:     '<rect x="48" y="58" width="24" height="19" rx="6"/>',
+  quad:    '<rect x="45" y="78" width="13" height="27" rx="6"/><rect x="62" y="78" width="13" height="27" rx="6"/>',
+  glute:   '<rect x="43" y="70" width="34" height="15" rx="7"/>',
+  calf:    '<rect x="46" y="104" width="12" height="17" rx="4"/><rect x="62" y="104" width="12" height="17" rx="4"/>',
+  full:    '<rect x="27" y="28" width="66" height="94" rx="18"/>'
+};
+const ARROWS = {
+  up:     '<path d="M105 24 L105 8 M100 13 L105 8 L110 13"/>',
+  down:   '<path d="M105 8 L105 24 M100 19 L105 24 L110 19"/>',
+  pull:   '<path d="M112 16 L96 16 M101 11 L96 16 L101 21"/>',
+  spread: '<path d="M96 16 L106 16 M100 12 L96 16 L100 20 M116 16 L106 16 M112 12 L116 16 L112 20" transform="translate(-4,0)"/>',
+  rotate: '<path d="M97 10 a9 9 0 1 1 -3 14 M96 20 L94 24 L100 25"/>',
+  crunch: '<path d="M97 8 Q108 16 97 24 M100 19 L97 24 L93 20"/>',
+  hold:   '<path d="M100 8 L100 24 M110 8 L110 24" stroke-dasharray="0"/>',
+  hinge:  '<path d="M96 8 L112 22 M105 17 L112 22 L106 22"/>',
+  burst:  '<path d="M104 16 L104 6 M104 16 L112 10 M104 16 L112 22 M104 16 L96 22 M104 16 L96 10"/>'
+};
+function diagram(zoneKey, arrowKey, color){
+  return `<svg class="diagram" viewBox="0 0 120 130">
+    <use href="#sil-body"/>
+    <g fill="${color}" fill-opacity="0.55">${ZONES[zoneKey]}</g>
+    <g stroke="${color}" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">${ARROWS[arrowKey]}</g>
+  </svg>`;
+}
+const YT = (q) => `https://www.youtube.com/results?search_query=${encodeURIComponent(q + ' execução técnica')}`;
+
+function exCard([order,name,series,reps,descanso,nota,zone,arrow,color,ytQuery]){
+  return `
+  <div class="ex-card">
+    ${diagram(zone,arrow,color)}
+    <div>
+      <div class="ex-name">${order}. ${name}</div>
+      <div class="ex-detail"><span><b>${series}</b> séries</span><span><b>${reps}</b> reps</span><span>descanso <b>${descanso}</b></span></div>
+      ${nota ? `<div class="ex-note">${nota}</div>` : ''}
+    </div>
+    <a class="yt-btn" href="${YT(ytQuery)}" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Ver vídeos
+    </a>
+  </div>`;
+}
+
+const C = {chest:'#ff4d2e', back:'#4fb3ff', arm:'#ffab7a', shoulder:'#ffc94f', abs:'#7cd992', leg:'#7cd992', glute:'#d68bff', power:'#ff6b3d'};
+
+const dia1 = [
+  ["01","Supino reto com halteres","4","8–12","90s","Halteres do rack + banco na posição reta. Cotovelos a ~45° do tronco.","chest","up",C.chest,"supino reto com halteres"],
+  ["02","Supino inclinado com halteres","4","8–12","90s","Banco a 30–45°. Foco na porção superior do peitoral.","chest","up",C.chest,"supino inclinado com halteres"],
+  ["03","Crucifixo com halteres","3","10–15","60s","Movimento em arco, cotovelos levemente flexionados o tempo todo.","chest","spread",C.chest,"crucifixo com halteres"],
+  ["04","Flexão de braço","3","até a falha","60s","Finalizador — mãos um pouco mais afastadas que os ombros.","chest","up",C.chest,"flexão de braço peitoral técnica"],
+  ["05","Tríceps testa com halteres","3","10–12","60s","Deitado no banco, cotovelos fixos apontando para o teto.","arm","down",C.arm,"tríceps testa com halteres"],
+  ["06","Tríceps corda no cross funcional","3","12–15","45s","Cotovelos colados ao corpo, abra a corda no final do movimento.","arm","down",C.arm,"tríceps corda polia cabo"],
+];
+const dia2 = [
+  ["01","Puxada aberta no cross funcional","4","8–12","90s","Ajuste as duas torres com barra reta em cima; puxe até o peito.","back","pull",C.back,"puxada frente polia alta"],
+  ["02","Remada curvada com halteres","4","8–12","90s","Tronco a 45°, cotovelos próximos ao corpo, puxe até a lateral das costelas.","back","pull",C.back,"remada curvada com halteres"],
+  ["03","Remada unilateral (serrote) com halteres","3","10–12 cada lado","60s","Apoie joelho e mão no banco, puxe o halter até a lateral do quadril.","back","pull",C.back,"remada serrote unilateral halteres"],
+  ["04","Remada baixa no cross funcional","3","10–12","60s","De frente para a torre baixa, puxe até o abdômen.","back","pull",C.back,"remada baixa cabo cross"],
+  ["05","Rosca direta com halteres","3","10–12","60s","Cotovelos fixos ao lado do corpo, sem balançar o tronco.","arm","rotate",C.arm,"rosca direta com halteres"],
+  ["06","Rosca martelo","3","10–12","45s","Pegada neutra (palmas uma para outra) — bíceps e antebraço.","arm","rotate",C.arm,"rosca martelo halteres"],
+];
+const dia3 = [
+  ["01","Agachamento livre com barra","4","8–10","2 min","Use a gaiola/rack com a barra. Desça até o quadril na altura do joelho ou abaixo.","leg","down",C.leg,"agachamento livre com barra técnica"],
+  ["02","Leg press / hack 45°","4","10–12","90s","Pés na largura dos ombros, não trave os joelhos no topo.","leg","up",C.leg,"leg press 45 graus execução"],
+  ["03","Afundo (passada) com halteres","3","10–12 cada perna","75s","Passo à frente, desça até o joelho de trás quase tocar o chão.","leg","down",C.leg,"afundo passada com halteres"],
+  ["04","Agachamento sumô com halter","3","12–15","60s","Pés afastados, pontas para fora, halter na vertical.","leg","down",C.leg,"agachamento sumô com halter"],
+  ["05","Panturrilha em pé com halteres","4","15–20","45s","Suba na ponta dos pés, segure 1s no topo antes de descer.","calf","up",C.leg,"panturrilha em pé com halteres"],
+];
+const dia4 = [
+  ["01","Desenvolvimento militar com halteres","4","8–12","90s","Sentado no banco com encosto, halteres na altura dos ombros.","shoulder","up",C.shoulder,"desenvolvimento militar com halteres"],
+  ["02","Elevação lateral","4","12–15","45s","Cotovelos levemente flexionados, suba até a linha dos ombros, sem impulso.","shoulder","spread",C.shoulder,"elevação lateral de ombro com halteres"],
+  ["03","Elevação frontal","3","10–12","45s","Suba os braços até a altura dos olhos, alternando ou juntos.","shoulder","up",C.shoulder,"elevação frontal de ombro halteres"],
+  ["04","Encolhimento de ombros (trapézio)","3","12–15","45s","Suba os ombros em direção às orelhas e desça controlado.","shoulder","up",C.shoulder,"encolhimento de ombros trapézio halteres"],
+  ["05","Abdominal supra no banco","3","15–20","30s","Mãos atrás da cabeça sem puxar o pescoço.","abs","crunch",C.abs,"abdominal supra no banco"],
+  ["06","Prancha abdominal","3","40–60s","30s","Corpo alinhado, abdômen contraído, quadril não pode cair.","abs","hold",C.abs,"prancha abdominal isométrica"],
+];
+const dia5 = [
+  ["01","Stiff com halteres","4","10–12","90s","Joelhos levemente flexionados, desça os halteres deslizando pela perna.","glute","hinge",C.glute,"stiff com halteres técnica"],
+  ["02","Elevação pélvica (hip thrust) no banco","4","10–15","75s","Costas apoiadas no banco, suba até o corpo formar uma linha reta.","glute","up",C.glute,"elevação pélvica hip thrust banco"],
+  ["03","Coice de glúteo no cross funcional","3","12–15 cada perna","45s","Tornozelo preso na polia baixa, empurre a perna para trás.","glute","pull",C.glute,"coice de glúteo polia cabo"],
+  ["04","Abdução de quadril no cross funcional","3","12–15 cada perna","45s","Tornozelo preso na polia lateral baixa, afaste a perna para o lado.","glute","spread",C.glute,"abdução de quadril polia lateral"],
+  ["05","Passada com halteres (foco glúteo)","3","10–12 cada perna","60s","Passo mais longo que o afundo tradicional, empurre pelo calcanhar.","glute","down",C.glute,"passada com halteres glúteo"],
+  ["06","Prancha lateral","3","30–45s cada lado","30s","Corpo alinhado de lado, quadril elevado, core lateral contraído.","abs","hold",C.abs,"prancha lateral abdominal"],
+];
+const dia6 = [
+  ["01","Agachamento pesado com barra","5","3–5","3 min","Carga alta, técnica impecável. Base de toda a força de perna.","leg","down",C.power,"agachamento força técnica baixo rep"],
+  ["02","Levantamento terra romeno pesado","4","4–6","3 min","Halteres ou barra pesados, foco em posterior de coxa e força de quadril.","glute","hinge",C.power,"stiff romanian deadlift pesado técnica"],
+  ["03","Supino reto pesado com halteres","4","4–6","2–3 min","Carga alta, parceiro de treino ou spotter é recomendado se possível.","chest","up",C.power,"supino halteres carga pesada"],
+  ["04","Remada curvada pesada com halteres","4","4–6","2 min","Tronco firme a 45°, puxe com controle mesmo com carga alta.","back","pull",C.power,"remada curvada pesada halteres"],
+  ["05","Desenvolvimento militar pesado","4","4–6","2 min","Sentado, carga alta, sem arquear demais a lombar.","shoulder","up",C.power,"desenvolvimento militar pesado técnica"],
+  ["06","Agachamento com salto (jump squat)","4","6–8","90s","Agache e exploda para cima saindo do chão — potência de pernas.","leg","burst",C.power,"agachamento com salto jump squat"],
+  ["07","Flexão explosiva (clap ou impulso)","3","6–10","90s","Empurre com força suficiente para as mãos saírem do chão.","chest","burst",C.power,"flexão explosiva plyometric push up"],
+  ["08","Balanço com halter (dumbbell swing)","4","12–15","60s","Movimento de quadril explosivo, halter sobe pela força do quadril, não do braço.","glute","burst",C.power,"dumbbell swing técnica"],
+  ["09","Sprint na esteira","6","20–30s forte","60–90s","6 tiros curtos em ritmo forte, caminhada leve entre eles.","leg","spread",C.power,"treino de sprint tiros esteira"],
+];
+
+function render(id,list){ document.getElementById(id).innerHTML = list.map(exCard).join(''); }
+render('grid-dia1',dia1); render('grid-dia2',dia2); render('grid-dia3',dia3);
+render('grid-dia4',dia4); render('grid-dia5',dia5); render('grid-dia6',dia6);
+</script>
+</body>
+</html>
